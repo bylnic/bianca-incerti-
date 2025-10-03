@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bianca Incerti - Psychothérapeute</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #d4a5a5 0%, #c9ada7 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        /* Page container */
+        .page {
+            display: none;
+            min-height: 100vh;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #f5ebe0 0%, #e3d5ca 100%);
+            color: #6b5b54;
+            padding: 150px 2rem 100px;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+        }
+
+        .hero-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .hero-image {
+            flex: 0 0 300px;
+        }
+
+        .hero-image img {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #d4a5a5;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            animation: fadeInUp 1s ease 0.2s backwards;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: #d4a5a5;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: fadeInUp 1s ease 0.4s backwards;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(212, 165, 165, 0.4);
+            background: #c9ada7;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, #d4a5a5 0%, #c9ada7 100%);
+            color: white;
+            padding: 120px 2rem 60px;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+        }
+
+        /* About Section */
+        .about {
+            padding: 80px 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .about-intro {
+            text-align: center;
+            font-size: 1.3rem;
+            color: #d4a5a5;
+            margin-bottom: 3rem;
+            font-style: italic;
+        }
+
+        .about-section {
+            margin-bottom: 3rem;
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .about-section h3 {
+            font-size: 1.8rem;
+            color: #d4a5a5;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #d4a5a5;
+            padding-bottom: 0.5rem;
+        }
+
+        .about-section p {
+            font-size: 1.05rem;
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+
+        .formations-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .formations-list li {
+            font-size: 1.05rem;
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .formations-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #d4a5a5;
+            font-weight: bold;
+        }
+
+        /* Services Section */
+        .services {
+            background: #faf8f5;
+            padding: 80px 2rem;
+            min-height: 80vh;
+        }
+
+        .services h2 {
+            font-size: 2.5rem;
+            color: #d4a5a5;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .services-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(212, 165, 165, 0.3);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            color: #d4a5a5;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .service-card p {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        /* Approach Section */
+        .approach {
+            padding: 80px 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .approach-intro {
+            text-align: center;
+            font-size: 1.15rem;
+            color: #555;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .therapy-section {
+            margin-bottom: 3rem;
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .therapy-section h3 {
+            font-size: 1.8rem;
+            color: #d4a5a5;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #d4a5a5;
+            padding-bottom: 0.5rem;
+        }
+
+        .therapy-section h4 {
+            font-size: 1.3rem;
+            color: #c9ada7;
+            margin: 1.5rem 0 1rem 0;
+        }
+
+        .therapy-section p {
+            font-size: 1.05rem;
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+
+        .therapy-questions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .question-block {
+            background: linear-gradient(135deg, #f5ebe015 0%, #e3d5ca15 100%);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid #d4a5a5;
+        }
+
+        .question-block h4 {
+            color: #d4a5a5;
+            margin: 0 0 0.5rem 0;
+            font-size: 1.2rem;
+        }
+
+        .question-block p {
+            margin: 0;
+            text-align: left;
+            font-size: 1rem;
+        }
+
+        .dissociation-list {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+
+        .dissociation-list li {
+            font-size: 1.05rem;
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .dissociation-list li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #d4a5a5;
+            font-weight: bold;
+        }
+
+        .ptr-note {
+            font-style: italic;
+            color: #d4a5a5 !important;
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: linear-gradient(135deg, #f5ebe010 0%, #e3d5ca10 100%);
+            border-radius: 10px;
+        }
+
+        .source-text {
+            color: #888 !important;
+            font-size: 0.9rem !important;
+            margin-top: 1rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: linear-gradient(135deg, #d4a5a5 0%, #c9ada7 100%);
+            color: white;
+            padding: 80px 2rem;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .contact h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .contact-item span {
+            font-size: 2rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #2d3748;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .hero-content {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .hero-image img {
+                width: 200px;
+                height: 200px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .services h2 {
+                font-size: 2rem;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .about-section {
+                padding: 1.5rem;
+            }
+
+            .about-section p {
+                text-align: left;
+            }
+
+            .therapy-section {
+                padding: 1.5rem;
+            }
+
+            .therapy-questions {
+                grid-template-columns: 1fr;
+            }
+
+            .therapy-section p {
+                text-align: left;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo" onclick="showPage('accueil')">Bianca Incerti</div>
+            <ul class="nav-links">
+                <li><a onclick="showPage('accueil')">Accueil</a></li>
+                <li><a onclick="showPage('apropos')">À propos</a></li>
+                <li><a onclick="showPage('services')">Services</a></li>
+                <li><a onclick="showPage('approche')">Approche</a></li>
+                <li><a onclick="showPage('contact')">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Page Accueil -->
+    <div id="accueil" class="page active">
+        <section class="hero">
+            <div class="hero-content">
+                <div class="hero-image">
+                    <img src="C:\Users\byloo\OneDrive\Bureau\projet site\photo.jpg" alt="Bianca Incerti">
+                </div>
+                <div class="hero-text">
+                    <h1>Bianca Incerti</h1>
+                    <p>Psychothérapeute - Accompagnement bienveillant vers le mieux-être</p>
+                    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                        <a onclick="showPage('apropos')" class="cta-button">En savoir plus sur moi</a>
+                        <a onclick="showPage('contact')" class="cta-button">Prendre rendez-vous</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="services">
+            <h2>Mes Services</h2>
+            <div class="services-grid">
+                <div class="service-card" onclick="showPage('approche')" style="cursor: pointer;">
+                    <div class="service-icon">🧠</div>
+                    <h3>Thérapie Brève & Systémique</h3>
+                    <p>Une approche orientée solution qui permet d'identifier et de mobiliser vos ressources pour surmonter les difficultés actuelles de manière efficace.</p>
+                    <p style="color: #d4a5a5; font-weight: bold; margin-top: 1rem;">En savoir plus →</p>
+                </div>
+                <div class="service-card" onclick="showPage('approche')" style="cursor: pointer;">
+                    <div class="service-icon">✨</div>
+                    <h3>Hypnose</h3>
+                    <p>L'hypnose thérapeutique facilite l'accès à vos ressources inconscientes pour favoriser le changement et soulager divers troubles.</p>
+                    <p style="color: #d4a5a5; font-weight: bold; margin-top: 1rem;">En savoir plus →</p>
+                </div>
+                <div class="service-card" onclick="showPage('approche')" style="cursor: pointer;">
+                    <div class="service-icon">💫</div>
+                    <h3>Psychothérapie du Trauma (PTR)</h3>
+                    <p>Une approche spécialisée pour traiter les traumatismes psychologiques et retrouver un sentiment de sécurité intérieure.</p>
+                    <p style="color: #d4a5a5; font-weight: bold; margin-top: 1rem;">En savoir plus →</p>
+                </div>
+                <div class="service-card" onclick="showPage('approche')" style="cursor: pointer;">
+                    <div class="service-icon">🧘</div>
+                    <h3>Sophrologie</h3>
+                    <p>Des techniques de relaxation et de gestion du stress pour vivre sereinement les moments importants de votre vie.</p>
+                    <p style="color: #d4a5a5; font-weight: bold; margin-top: 1rem;">En savoir plus →</p>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2025 Bianca Incerti - Psychothérapeute | Tous droits réservés</p>
+        </footer>
+    </div>
+
+    <!-- Page À propos -->
+    <div id="apropos" class="page">
+        <div class="page-header">
+            <h1>À propos</h1>
+        </div>
+        
+        <section class="about">
+            <div class="about-intro">
+                <p><em>Ça prend du temps de grandir… Ça prend du temps de changer, trouver son chemin, celui qui fera sens à soi.</em></p>
+            </div>
+            
+            <div class="about-section">
+                <h3>Mon histoire</h3>
+                <p>Je suis née de parents italiens et je suis enfant unique. Très jeune, j'ai été confrontée à la maladie, celle de mon père. La petite fille que j'étais s'est alors investie naturellement dans le soin, le soutien, la présence à lui. Il mourra l'année de mes douze ans. Confrontée à sa souffrance et à ma souffrance de le perdre, j'avais déjà appris à soigner, à observer pour aider, à donner de moi-même. L'expérience de cette période de vie m'a laissé une empreinte de mission. Mes parents étaient commerçants, j'ai donc évolué dans cet univers du commerce une partie de ma vie.</p>
+                
+                <p>À la fin des années 90, une remise en question m'a permis un autre regard sur mes choix de vie, m'ouvrant ainsi à une prise de conscience de mes intérêts et de mes aptitudes à être dans la relation d'aide.</p>
+                
+                <p>S'en suivent des formations centrées sur les thérapies brèves, comportementales, systémiques, la sophrologie et l'hypnose. Fin des années 90, je décide de pratiquer, et ce sera le début de mon activité en cabinet privé.</p>
+                
+                <p>En 2008 et pendant 10 ans, j'ai intégré une équipe pluridisciplinaire dans le secteur de l'aide à la jeunesse où j'ai travaillé avec des jeunes et des familles qui souvent faisaient face à des situations difficiles, pénibles et parfois dramatiques d'un point de vue humain et aussi matériel. Ce travail a permis une constante introspection et remise en question sur moi-même. J'y ai beaucoup appris, m'y suis beaucoup investie, accompagnée par des collègues extrêmement bienveillants.</p>
+                
+                <p>Aujourd'hui je travaille en cabinet privé, j'y reçois des familles, couples, adultes, ados et enfants. L'expérience acquise lors de mon activité dans le secteur de l'aide à la jeunesse (2008-2017, ASBL SILOE) m'a permis de développer des compétences facilitatrices à entrer dans le travail avec les enfants et les adolescents.</p>
+            </div>
+
+            <div class="about-section">
+                <h3>Mes formations</h3>
+                <ul class="formations-list">
+                    <li>Sophrologie / Sophrologie dynamique. Fédération européenne de sophrologie. Institut de dynagogie.</li>
+                    <li>Thérapie brève systémique et stratégique, hypnose. ASBL Prismes et résonances, formatrice Barbara Briqmanne.</li>
+                    <li>EMDR, processus de désensibilisation par le mouvement des yeux. ASBL Prismes et résonances, formatrice Barbara Briqmanne.</li>
+                    <li>Hypnose stratégique et conversationnelle et thérapie brève. Institut Milton Erickson de Belgique, formateur Gérald Brassine.</li>
+                    <li>Thérapie orientée solution. Thérapie couple orientée solution. Thérapie solutionniste à destination des jeunes. ASBL Narration, formateur Benoît Demonty.</li>
+                    <li>Gestion du poids en hypnose médicale. Hôpital St Pierre, formateur Docteur Van Alphen.</li>
+                    <li>Arrêt tabac en hypnose. Institut de formation à l'arrêt du tabac par l'hypnose, formateur Michel Martin.</li>
+                    <li>Journées à thèmes en hypnose conversationnelle stratégique. Centre de formation Absolem, formatrice Sandra Depasse.</li>
+                    <li>Thérapie ACT (thérapie en acceptation et engagement), Université Libre de Bruxelles.</li>
+                </ul>
+            </div>
+
+            <div class="about-section">
+                <h3>Supervisions</h3>
+                <p><strong>Supervisions individuelles:</strong> Jean Luc Gatel, Psychothérapeute. Andrea Agosta, Psychothérapeute.</p>
+                <p><strong>Supervisions collectives:</strong> Groupe Regards Croisés, équipe pluridisciplinaire.</p>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2025 Bianca Incerti - Psychothérapeute | Tous droits réservés</p>
+        </footer>
+    </div>
+
+    <!-- Page Services -->
+    <div id="services" class="page">
+        <div class="page-header">
+            <h1>Mes Services</h1>
+        </div>
+        
+        <section class="services">
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🧠</div>
+                    <h3>Thérapie Brève & Systémique</h3>
+                    <p>Une approche orientée solution qui permet d'identifier et de mobiliser vos ressources pour surmonter les difficultés actuelles de manière efficace.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">✨</div>
+                    <h3>Hypnose</h3>
+                    <p>L'hypnose thérapeutique facilite l'accès à vos ressources inconscientes pour favoriser le changement et soulager divers troubles.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">💫</div>
+                    <h3>Psychothérapie du Trauma (PTR)</h3>
+                    <p>Une approche spécialisée pour traiter les traumatismes psychologiques et retrouver un sentiment de sécurité intérieure.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🧘</div>
+                    <h3>Sophrologie</h3>
+                    <p>Des techniques de relaxation et de gestion du stress pour vivre sereinement les moments importants de votre vie.</p>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2025 Bianca Incerti - Psychothérapeute | Tous droits réservés</p>
+        </footer>
+    </div>
+
+    <!-- Page Approche -->
+    <div id="approche" class="page">
+        <div class="page-header">
+            <h1>Approche Thérapeutique</h1>
+        </div>
+        
+        <section class="approach">
+            <div class="approach-intro">
+                <p>Pour apporter de l'aide à mes patients, selon les problèmes et la demande de chacun, j'utilise les outils fournis par la thérapie brève et systémique, l'hypnose ou encore la Psychothérapie du Trauma Réassociative (PTR). Je propose également l'utilisation de la sophrologie qui permet à tous de pouvoir vivre de façon moins stressante les moments les plus divers de la vie.</p>
+            </div>
+
+            <div class="therapy-section">
+                <h3>La Thérapie Brève</h3>
+                <div class="therapy-questions">
+                    <div class="question-block">
+                        <h4>Pour qui ?</h4>
+                        <p>La thérapie brève et systémique s'adresse aux personnes vivant une situation comme problématique, avec comme symptôme une souffrance morale ou physique (situation de deuil, séparation, problèmes relationnels, familiaux, confiance en soi…).</p>
+                    </div>
+                    <div class="question-block">
+                        <h4>Pourquoi ?</h4>
+                        <p>Pour toute situation suscitant une difficulté ou une souffrance.</p>
+                    </div>
+                    <div class="question-block">
+                        <h4>Dans quel but ?</h4>
+                        <p>Soulager le plus rapidement possible cette souffrance, via des solutions envisageables et acceptables pour le patient.</p>
+                    </div>
+                </div>
+                
+                <p>Cette thérapie se veut courte, mais parfois permet de mettre en évidence d'autres situations qui pourront être travaillées. Une latitude existe donc dans le nombre de séances en fonction de chaque cas.</p>
+                
+                <p>La thérapie brève est issue de l'École de Palo Alto (USA) dans les années 60. C'est une thérapie pragmatique axée sur la résolution d'un problème. Le rôle du thérapeute est de clarifier, avec l'aide du patient, la nature du problème dans l'ici et maintenant, d'identifier avec lui toutes les tentatives de solutions utilisées jusque-là et de prescrire des tâches innovantes et facilitatrices afin d'atteindre l'objectif de départ.</p>
+                
+                <p>Cette thérapie tient compte de l'aspect inter-relationnel (famille, milieu professionnel, groupe…), elle est donc systémique. C'est aussi une thérapie axée sur les faits concrets et leurs contextes. Le patient sera acteur et actif dans le travail, mais il ne lui sera rien demandé qui pourrait aller à son encontre. Le thérapeute se veut non normatif et respectueux des croyances, des valeurs et idéaux du patient.</p>
+            </div>
+
+            <div class="therapy-section">
+                <h3>La Sophrologie</h3>
+                <p>Créée par le Professeur Alfonso Caycedo dans les années 1960, cette méthode intègre différentes pratiques orientales et occidentales destinées à développer et à améliorer le potentiel des êtres humains. Il nomme cette nouvelle méthode « Sophrologie » : « Sos » pour harmonie, « Phren » pour Conscience, « Logia » pour Étude. A.Caycedo diffusera cette nouvelle méthode dans son pays, la Colombie, et chargera des collègues de la développer en Europe.</p>
+                
+                <p>En France, c'est le docteur Yves Davrou, son assistant et traducteur, qui s'occupera de la développer. J'ai eu la chance d'expérimenter des exercices et de participer à un cours avec Yves Davrou au début des années 2000. Yves Davrou introduit dans la méthode de base le concept des fonctions de la conscience (fonction rationnelle, sensorielle, émotionnelle, intuitive et transcendante). Elle deviendra ainsi la "sophrologie dynamique".</p>
+                
+                <p>La sophrologie dynamique intègre à la sophrologie classique des notions d'énergétique, de façon à la rendre plus performante et plus adaptée aux besoins d'harmonisation des individus, tant sur le plan prophylactique que thérapeutique. C'est un outil permettant de prendre conscience de notre énergie vitale et de dynamiser celle-ci par l'apprentissage d'exercices corporels et des visualisations. Cette pratique permet d'apprendre la détente et la relaxation, d'élargir et de tonifier notre conscience.</p>
+                
+                <p>C'est une méthode simple et accessible à tous, sans pré-requis, invitant l'apprenant à devenir responsable, autonome par son entraînement personnel, et authentique dans l'expérience du vécu. Elle s'applique dans de nombreux domaines tels que la santé, la maternité, la pédagogie, le sport, l'entreprise et dans la gestion du stress.</p>
+            </div>
+
+            <div class="therapy-section">
+                <h3>L'Hypnose</h3>
+                <p>L'hypnose fait partie des thérapies utilisées dans de nombreuses applications, notamment à l'hôpital lors de certaines interventions chirurgicales, en dentisterie, dans le cadre des demandes arrêts tabac, dans la gestion des phobies et des problèmes alimentaires ou encore dans le traitement des addictions.</p>
+                
+                <p>L'état hypnotique pourrait s'apparenter à une forme de rêverie (être dans la lune) et permet d'accéder à l'inconscient grâce auquel nous pourrons développer des compétences.</p>
+            </div>
+
+            <div class="therapy-section">
+                <h3>La Psychothérapie du Trauma Réassociative (PTR)</h3>
+                <p>L'approche a été créée au sein de l'institut Milton Erickson (IMHEB) par le psychothérapeute belge Gérald Brassine.</p>
+                
+                <p>La Psychothérapie du Trauma Réassociative (PTR) s'est développée à partir de la connaissance et de l'utilisation de modèles thérapeutiques considérés comme les meilleurs dans ce domaine : les Concepts analytiques, l'Approche Cognitivo-Comportementale, l'Hypnose Ericksonienne, l'EMDR, etc… Cette approche repose donc sur des bases théoriques et pratiques solides. Les praticiens qui reçoivent cette formation qui fait appel, entre autres, à la gestion des états modifiés de conscience, reçoivent donc une formation polyvalente qui leur permet d'appréhender de manière performante d'autres situations, non seulement dans le cas de traumas mais aussi dans un cadre élargi.</p>
+                
+                <h4>En quoi consiste la technique ?</h4>
+                <p>L'Hypnose ou état modifié de conscience est au cœur du traitement des psychotraumas puisque, comme beaucoup d'auteurs le signalent, le trauma est contracté, parfois en quelques instants, dans un état modifié de conscience créé par le choc émotionnel de l'incident traumatique. C'est pour cette raison, semble-t-il, que la vie de la personne atteinte est perturbée par des symptômes véhiculés par des phénomènes hypnotiques tels que anesthésie, amnésie, dissociations diverses dont la psychosomatique, distorsion temporelle…</p>
+                
+                <p>Le thérapeute va utiliser un état modifié de conscience que le patient aura préalablement appris à développer et à maîtriser. Cet apprentissage sera le fruit de ses propres compétences à faire apparaître les protections dissociatives. Cette reprise en main du patient par ses propres ressources est fondamentale et est la pierre angulaire du traitement.</p>
+                
+                <p>Ainsi en reprenant le contrôle de son système nerveux autonome et en développant ses protections dissociatives, le patient va être invité à modifier son vécu et son ressenti émotionnel par rapport à ce qui l'a traumatisé.</p>
+                
+                <h4>Protections dissociatives :</h4>
+                <ul class="dissociation-list">
+                    <li><strong>Dissociation corporelle :</strong> exprimée comme « j'étais à côté de mon corps», «comme collé au plafond au-dessus de moi-même»</li>
+                    <li><strong>Anesthésie (catalepsie) :</strong> ressenti d'incapacité à bouger, pétrification et paralysie du système moteur, exprimée comme «j'étais insensible à la douleur, aux émotions»</li>
+                    <li><strong>Amnésie :</strong> incapacité à évoquer des souvenirs personnels importants ou stressants</li>
+                    <li><strong>Dissociation émotionnelle :</strong> ne pas avoir d'émotion, être insensible, telle une anesthésie émotionnelle</li>
+                    <li><strong>Distorsion temporelle :</strong> phénomène naturel expérimenté par tous quotidiennement, l'incident semble avoir duré plus longtemps que réellement, ou moins longtemps</li>
+                </ul>
+                
+                <p>La PTR sera donc indiquée pour toute personne présentant le tableau clinique d'un syndrome de stress post-traumatique, d'une douleur psychosomatique.</p>
+                
+                <p class="ptr-note"><em>La PTR est un outil efficace qui permet une vraie interaction entre le patient et son thérapeute.</em></p>
+                
+                <p class="source-text"><small>Source : Gérald Brassine, Institut Milton Erickson Belge, www.imheb.be</small></p>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2025 Bianca Incerti - Psychothérapeute | Tous droits réservés</p>
+        </footer>
+    </div>
+
+    <!-- Page Contact -->
+    <div id="contact" class="page">
+        <section class="contact">
+            <h2>Prendre Contact</h2>
+            <p>N'hésitez pas à me contacter pour toute question ou pour prendre rendez-vous</p>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span>📧</span>
+                    <a href="mailto:contact@biancaincerti.be">contact@biancaincerti.be</a>
+                </div>
+                <div class="contact-item">
+                    <span>📱</span>
+                    <a href="tel:+32 475 92 59 09"> +32 475 92 59 09</a>
+                </div>
+                <div class="contact-item">
+                    <span>📍</span>
+                    <div>Rue Emile Tumelaire, 91 6000 Charleroi</div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2025 Bianca Incerti - Psychothérapeute | Tous droits réservés</p>
+        </footer>
+    </div>
+
+    <script>
+        function showPage(pageName) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show selected page
+            const selectedPage = document.getElementById(pageName);
+            if (selectedPage) {
+                selectedPage.classList.add('active');
+            }
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe service cards
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.service-card').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>
